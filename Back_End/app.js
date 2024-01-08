@@ -73,6 +73,24 @@ app.post("/auth/adminlogin", (req, res) => {
   });
 });
 
+// Adding new category
+app.post("/auth/add_category", (req, res) => {
+  const sql = "INSERT INTO category (`category_name`) VALUES (?)";
+  db.query(sql, [req.body.category_name], (err, result) => {
+    if (err) {
+      return res.json({
+        status: false,
+        Error: "Internal Server Error",
+      });
+    } else {
+      return res.json({
+        status: true,
+        success: "New Category added successfully!!",
+      });
+    }
+  });
+});
+
 //Listening to Server
 app.listen(port, () => {
   console.log(`Listening at port ${port}`);
