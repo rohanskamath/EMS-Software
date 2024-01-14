@@ -9,20 +9,22 @@ const AddCategory = () => {
   const naviagate = useNavigate();
 
   const handleCategory = (e) => {
-    axios.post("http://localhost:3000/auth/add_category", { category_name: newCategory })
+    axios.post("http://localhost:3000/category/add_category", { category_name: newCategory })
       .then(result => {
         if (result.data.status) {
           toast.success(result.data.success, {
-            theme: "dark"
+            theme: "dark",
+            autoClose: 2000,
           });
           
           setTimeout(() => {
            naviagate("/dashboard/category")
-          }, 6000);
+          }, 3000);
 
         } else {
           toast.error(result.data.Error, {
-            theme: "dark"
+            theme: "dark",
+            autoClose: 2000,
           });
         }
       })

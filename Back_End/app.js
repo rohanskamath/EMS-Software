@@ -74,7 +74,7 @@ app.post("/auth/adminlogin", (req, res) => {
 });
 
 // Adding new category
-app.post("/auth/add_category", (req, res) => {
+app.post("/category/add_category", (req, res) => {
   const sql = "INSERT INTO category (`category_name`) VALUES (?)";
   db.query(sql, [req.body.category_name], (err, result) => {
     if (err) {
@@ -87,6 +87,31 @@ app.post("/auth/add_category", (req, res) => {
         status: true,
         success: "New Category added successfully!!",
       });
+    }
+  });
+});
+
+//Display all Category
+app.get("/category", (req, res) => {
+  const sql = "SELECT * FROM category";
+  db.query(sql, (err, result) => {
+    if (err) {
+      return res.json({
+        status: false,
+        Error: "Internal Server Error",
+      });
+    } else {
+      if (result.length > 0) {
+        return res.json({
+          status: true,
+          data: result,
+        });
+      } else {
+        return res.json({
+          status: false,
+          Error: "No Records Found"
+        })
+      }
     }
   });
 });

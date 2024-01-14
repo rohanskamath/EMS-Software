@@ -27,6 +27,7 @@ const App = () => {
             <Route path='/dashboard/employee' element={<Employee />}></Route>
             <Route path='/dashboard/category' element={<Category />}></Route>
             <Route path='/dashboard/profile' element={<Profile />}></Route>
+            
             <Route path='/dashboard/add_category' element={<AddCategory />}></Route>
 
           </Route>

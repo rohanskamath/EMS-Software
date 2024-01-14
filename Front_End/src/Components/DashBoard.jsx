@@ -24,11 +24,11 @@ const DashBoard = () => {
               </li>
               <li className='w-100'>
                 <Link to="/dashboard/profile" className='nav-link text-white px-0 align-middle'>
-                <i className='fs-4 bi-person'></i><span className='ms-2 d-none d-sm-inline'>Profile</span></Link>
+                  <i className='fs-4 bi-person'></i><span className='ms-2 d-none d-sm-inline'>Profile</span></Link>
               </li>
               <li className='w-100'>
                 <Link to="/dashboard/logout" className='nav-link text-white px-0 align-middle'>
-                <i className='fs-4 bi-power'></i><span className='ms-2 d-none d-sm-inline'>Logout</span></Link>
+                  <i className='fs-4 bi-power'></i><span className='ms-2 d-none d-sm-inline'>Logout</span></Link>
               </li>
             </ul>
           </div>

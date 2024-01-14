@@ -20,17 +20,19 @@ const Login = () => {
         axios.post('http://localhost:3000/auth/adminlogin', values)
             .then(result => {
                 if (result.data.loginStatus) {
-                    toast.success(result.data.successLogin, {
-                        theme: "dark"
+                    toast.success("Loading............... ", {
+                        theme: "dark",
+                        autoClose: 2000,
                     });
                     setTimeout(() => {
                         navigate('/dashboard')
-                    }, 6000);
+                    }, 3000);
 
 
                 } else {
                     toast.error(result.data.errorLogin, {
-                        theme: "dark"
+                        theme: "dark",
+                        autoClose: 2000,
                     });
                 }
             })

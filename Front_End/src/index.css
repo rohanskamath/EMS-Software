@@ -1,15 +1,23 @@
-body{
-    font-family: 'PT Serif', serif;
+body {
+  font-family: "PT Serif", serif;
 }
 
-.loginPage{
-    background: linear-gradient(rgba(11,11,11,0.5), rgba(10,10,10,0.5)),url('./assets/loginPageImage.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% 120%;
+.loginPage {
+  background: linear-gradient(rgba(11, 11, 11, 0.5), rgba(10, 10, 10, 0.5)),
+    url("./assets/loginPageImage.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 120%;
 }
 
-.loginForm{
-    background-color: black;
-    color: white;
+.loginForm {
+  background-color: black;
+  color: white;
+}
+
+.custom-datatable .dataTables_length {
+  display: none;
+}
+.custom-datatable .pagination {
+  display: none;
 }
