@@ -2,6 +2,7 @@ import React, { Profiler } from 'react'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-toastify/dist/ReactToastify.css';
+import "bootstrap-icons/font/bootstrap-icons.css"
 
 import { BrowserRouter, Routes, Route, Router } from 'react-router-dom'
 import DashBoard from './Components/DashBoard'
@@ -12,6 +13,7 @@ import Category from './Components/Category';
 import Profile from './Components/Profile';
 import AddCategory from './Components/AddCategory';
 import AddEmployee from './Components/AddEmployee';
+import EditEmployee from './Components/EditEmployee';
 
 const App = () => {
   return (
@@ -31,6 +33,7 @@ const App = () => {
 
             <Route path='/dashboard/add_category' element={<AddCategory />}></Route>
             <Route path='/dashboard/add_employee' element={<AddEmployee />}></Route>
+            <Route path='/dashboard/edit_employee/:id' element={<EditEmployee />}></Route>
 
           </Route>
 

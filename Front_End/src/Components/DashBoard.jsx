@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import "bootstrap-icons/font/bootstrap-icons.css"
 
 const DashBoard = () => {
   return (

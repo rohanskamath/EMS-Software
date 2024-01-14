@@ -13,7 +13,6 @@ const path = require("path");
 
 // Connection to Express
 const app = express();
-app.use(express.static(path.join(__dirname, "public")));
 
 //app.use(cors()) -->Normal use
 
@@ -140,7 +139,7 @@ const upload = multer({
 });
 
 // Adding new employee details
-app.post("/employee/add_employee", upload.single('emp_image'), (req, res) => {
+app.post("/employee/add_employee", upload.single("emp_image"), (req, res) => {
   const sql = `INSERT INTO employee (emp_name,emp_email,emp_pass,emp_sal,emp_addr,emp_img,dept_id) VALUES (?)`;
   bcrypt.hash(req.body.emp_pass, 10, (err, hashPass) => {
     if (err) {
@@ -174,6 +173,33 @@ app.post("/employee/add_employee", upload.single('emp_image'), (req, res) => {
     }
   });
 });
+
+// Display all employees
+app.get("/employee", (req, res) => {
+  const sql = "SELECT e.emp_id,e.emp_name,e.emp_email,e.emp_sal,e.emp_addr,e.emp_img,c.category_name FROM employee e,category c where e.dept_id=c.id";
+  db.query(sql, (err, result) => {
+    if (err) {
+      return res.json({
+        status: false,
+        Error: "Internal Server Error",
+      });
+    } else {
+      if (result.length > 0) {
+        return res.json({
+          status: true,
+          data: result,
+        });
+      } else {
+        return res.json({
+          status: false,
+          Error: "No records found",
+        });
+      }
+    }
+  });
+});
+
+app.use(express.static("public"));
 
 //Listening to Server
 app.listen(port, () => {

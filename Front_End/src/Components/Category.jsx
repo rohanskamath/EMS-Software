@@ -41,7 +41,7 @@ const Category = () => {
       <hr className='bg-black  w-100' />
       <Link to="/dashboard/add_category" className='btn btn-outline-success mt-2 ms-4'>Add Department</Link>
       <div>
-        <MDBDataTable striped bordered noBottomColumns={true} reponsiveSm={true} searching={false} className="m-5 custom-datatable" data={tableData} />
+        <MDBDataTable striped bordered noBottomColumns={true} reponsivesm={true} searching={false} className="m-5 custom-datatable" data={tableData} />
       </div>
     </>
 
