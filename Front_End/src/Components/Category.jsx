@@ -20,12 +20,12 @@ const Category = () => {
 
   const columns = [
     { label: 'Deparment ID', field: 'id', sort: 'asc', width: 150 },
-    { label: 'Category Name', field: 'category_name', sort: 'asc', width: 270 },
+    { label: 'Department Name', field: 'category_name', sort: 'asc', width: 270 },
   ];
 
   const rows = dynamicData.map((item, index) => ({
     ...item,
-    id: index + 1,
+    id: "DEPT100"+ (index +1),
   }));
 
   const tableData = {
@@ -39,7 +39,7 @@ const Category = () => {
         <h3>Category List</h3>
       </div>
       <hr className='bg-black  w-100' />
-      <Link to="/dashboard/add_category" className='btn btn-outline-success mt-2 ms-4'>Add Category</Link>
+      <Link to="/dashboard/add_category" className='btn btn-outline-success mt-2 ms-4'>Add Department</Link>
       <div>
         <MDBDataTable striped bordered noBottomColumns={true} reponsiveSm={true} searching={false} className="m-5 custom-datatable" data={tableData} />
       </div>

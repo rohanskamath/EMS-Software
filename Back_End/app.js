@@ -1,9 +1,15 @@
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
-const path = require("path");
 
 const jwt = require("jsonwebtoken");
+
+//For Hashing of password
+const bcrypt = require("bcrypt");
+
+//For handling image upload
+const multer = require("multer");
+const path = require("path");
 
 // Connection to Express
 const app = express();
@@ -73,7 +79,7 @@ app.post("/auth/adminlogin", (req, res) => {
   });
 });
 
-// Adding new category
+// Adding new category/department
 app.post("/category/add_category", (req, res) => {
   const sql = "INSERT INTO category (`category_name`) VALUES (?)";
   db.query(sql, [req.body.category_name], (err, result) => {
@@ -91,7 +97,7 @@ app.post("/category/add_category", (req, res) => {
   });
 });
 
-//Display all Category
+//Display all Category/Department
 app.get("/category", (req, res) => {
   const sql = "SELECT * FROM category";
   db.query(sql, (err, result) => {
@@ -109,9 +115,62 @@ app.get("/category", (req, res) => {
       } else {
         return res.json({
           status: false,
-          Error: "No Records Found"
-        })
+          Error: "No Records Found",
+        });
       }
+    }
+  });
+});
+
+//image upload
+const storageValue = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "Public/Images");
+  },
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      file.fieldname + "_" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
+const upload = multer({
+  storage: storageValue,
+});
+
+// Adding new employee details
+app.post("/employee/add_employee", upload.single('emp_image'), (req, res) => {
+  const sql = `INSERT INTO employee (emp_name,emp_email,emp_pass,emp_sal,emp_addr,emp_img,dept_id) VALUES (?)`;
+  bcrypt.hash(req.body.emp_pass, 10, (err, hashPass) => {
+    if (err) {
+      return res.json({
+        status: false,
+        Error: "Internal Server Error",
+      });
+    } else {
+      const values = [
+        req.body.emp_name,
+        req.body.emp_email,
+        hashPass,
+        req.body.emp_sal,
+        req.body.emp_addr,
+        req.file.filename,
+        req.body.emp_dept,
+      ];
+      db.query(sql, [values], (err, result) => {
+        if (err) {
+          return res.json({
+            status: false,
+            Error: "Internal Server Error",
+          });
+        } else {
+          return res.json({
+            status: true,
+            success: "New Employee added successfully!!",
+          });
+        }
+      });
     }
   });
 });

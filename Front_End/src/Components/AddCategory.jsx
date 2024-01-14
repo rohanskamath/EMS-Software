@@ -39,10 +39,10 @@ const AddCategory = () => {
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">
             <div className="card shadow-2-strong border shadow" style={{ borderRadius: "1rem" }}>
               <div className="card-body p-5">
-                <h3 className="mb-5 text-center fs-1">Add Category</h3>
+                <h3 className="mb-5 text-center fs-1">Add Department</h3>
 
                 <div className="form-outline mb-4">
-                  <label htmlFor="category">New category</label>
+                  <label htmlFor="category">New Department</label>
                   <input type="category" name="category" autoComplete="off" className="form-control form-control-md shadow-none" placeholder='Enter your category' onChange={(e) => setNewCategory(e.target.value)} />
                 </div>
                 <button className="btn btn-success w-100" type="submit" onClick={handleCategory}>Add Category</button>
