@@ -271,6 +271,48 @@ app.delete("/delete_employee/:id", (req, res) => {
   });
 });
 
+// Count Salary and Employees
+app.get("/employee_count", (req, res) => {
+  const sql = "SELECT COUNT(emp_id) as employee FROM employee";
+  db.query(sql, (err, result) => {
+    if (err) {
+      return res.json({
+        status: false,
+        Error: "Internal Server Error",
+      });
+    } else {
+      return res.json({
+        status: true,
+        data: result,
+      });
+    }
+  });
+});
+
+app.get("/salary_count", (req, res) => {
+  const sql = "SELECT SUM(emp_sal) as salaries FROM employee";
+  db.query(sql, (err, result) => {
+    if (err) {
+      return res.json({
+        status: false,
+        Error: "Internal Server Error",
+      });
+    } else {
+      return res.json({
+        status: true,
+        data: result,
+      });
+    }
+  });
+});
+
+// Logout
+app.get("/auth/logout",(req,res)=>{
+  res.clearCookie('token')
+  return res.json({
+    status:true
+  })
+})
 app.use(express.static("public"));
 
 //Listening to Server
