@@ -22,11 +22,11 @@ const App = () => {
 
         <Routes>
 
-          <Route path='/adminlogin' element={<Login />}></Route>
+          <Route path='/' element={<Login />}></Route>
 
           <Route path='/dashboard' element={<DashBoard />}>
 
-            <Route path='' element={<Home />}></Route>
+            <Route path='/dashboard/home' element={<Home />}></Route>
             <Route path='/dashboard/employee' element={<Employee />}></Route>
             <Route path='/dashboard/category' element={<Category />}></Route>
             <Route path='/dashboard/profile' element={<Profile />}></Route>

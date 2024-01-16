@@ -29,14 +29,14 @@ const AddEmployee = () => {
 
     const handleSubmitData = (e) => {
         e.preventDefault();
-        const formData=new FormData();
-        formData.append("emp_name",employeeValues.emp_name);
-        formData.append("emp_email",employeeValues.emp_email);
-        formData.append("emp_pass",employeeValues.emp_pass);
-        formData.append("emp_sal",employeeValues.emp_sal);
-        formData.append("emp_dept",employeeValues.emp_dept);
-        formData.append("emp_addr",employeeValues.emp_addr);
-        formData.append("emp_image",employeeValues.emp_image);
+        const formData = new FormData();
+        formData.append("emp_name", employeeValues.emp_name);
+        formData.append("emp_email", employeeValues.emp_email);
+        formData.append("emp_pass", employeeValues.emp_pass);
+        formData.append("emp_sal", employeeValues.emp_sal);
+        formData.append("emp_dept", employeeValues.emp_dept);
+        formData.append("emp_addr", employeeValues.emp_addr);
+        formData.append("emp_image", employeeValues.emp_image);
 
         axios.post("http://localhost:3000/employee/add_employee", formData)
             .then(result => {
@@ -46,7 +46,7 @@ const AddEmployee = () => {
                 });
                 setTimeout(() => {
                     window.location.reload()
-                   }, 2000);
+                }, 2000);
             })
             .catch((err) => {
                 toast.error(result.data.Error, {
