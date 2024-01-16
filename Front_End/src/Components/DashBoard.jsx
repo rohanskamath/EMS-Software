@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
@@ -6,7 +6,20 @@ import { ToastContainer, toast } from 'react-toastify';
 const DashBoard = () => {
 
   const navigate = useNavigate();
+  const [adminData, setAdminData] = useState([])
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/admins')
+      .then(result => {
+        if (result.data.status) {
+          setAdminData(result.data.data[0]);
+        }
+      })
+      .catch(err => console.log(err))
+  }, []);
+
   axios.defaults.withCredentials = true;
+
   const HandleLogout = () => {
     axios.get('http://localhost:3000/auth/logout')
       .then(result => {
@@ -14,10 +27,10 @@ const DashBoard = () => {
           toast.success("Logging Out...", {
             theme: "dark",
             autoClose: 1000,
-        });
-        setTimeout(() => {
+          });
+          setTimeout(() => {
             navigate('/')
-        }, 2000);
+          }, 2000);
         }
       })
   }
@@ -42,7 +55,7 @@ const DashBoard = () => {
                   <i className='fs-4 bi-columns'></i><span className='ms-2 d-none d-sm-inline'>Department</span></Link>
               </li>
               <li className='w-100'>
-                <Link to="/dashboard/profile" className='nav-link text-white px-0 align-middle'>
+                <Link to={`/dashboard/profile/` + adminData.id} className='nav-link text-white px-0 align-middle'>
                   <i className='fs-4 bi-person'></i><span className='ms-2 d-none d-sm-inline'>Profile</span></Link>
               </li>
               <li className='w-100' onClick={HandleLogout}>
@@ -53,7 +66,7 @@ const DashBoard = () => {
           </div>
         </div>
         <div className='col p-0 m-0'>
-          <div className='p-3 d-flex justify-content-center shadow'><h4>Employee Tracker System</h4></div>
+          <div className='p-3 d-flex justify-content-center shadow'><h4>Employee Tracking System</h4></div>
           <Outlet />
         </div>
       </div>

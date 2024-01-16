@@ -306,13 +306,50 @@ app.get("/salary_count", (req, res) => {
   });
 });
 
+// Get all admins if more than 1 admins
+app.get("/admins", (req, res) => {
+  const sql = "SELECT * FROM admin";
+  db.query(sql, (err, result) => {
+    if (err) {
+      return res.json({
+        status: false,
+        Error: "Internal Server Error",
+      });
+    } else {
+      return res.json({
+        status: true,
+        data: result,
+      });
+    }
+  });
+});
+
+// Get profile details
+app.get("/profile/:id", (req, res) => {
+  const id = req.params.id;
+  const sql = "SELECT * FROM admin WHERE id=?";
+  db.query(sql, [id], (err, result) => {
+    if (err) {
+      return res.json({
+        status: false,
+        Error: "Internal Server Error",
+      });
+    } else {
+      return res.json({
+        status: true,
+        data: result,
+      });
+    }
+  });
+});
+
 // Logout
-app.get("/auth/logout",(req,res)=>{
-  res.clearCookie('token')
+app.get("/auth/logout", (req, res) => {
+  res.clearCookie("token");
   return res.json({
-    status:true
-  })
-})
+    status: true,
+  });
+});
 app.use(express.static("public"));
 
 //Listening to Server
